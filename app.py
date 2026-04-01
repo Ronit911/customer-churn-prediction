@@ -127,11 +127,12 @@ if st.button("🚀 Predict Churn Risk"):
     st.markdown("---")
     st.subheader("💡 Prediction Result")
     
-    if prediction == 1:
-        st.error(f"🚨 **High Churn Risk!** This customer is highly likely to leave.")
-        st.write(f"**Probability of Churning:** {prediction_proba * 100:.2f}%")
-        st.progress(float(prediction_proba))
+    if prediction_proba < 0.3:
+        st.success(f"🟢 **Low Risk!** This customer is highly likely to stay.")
+    elif prediction_proba < 0.7:
+        st.warning(f"🟡 **Medium Risk!** This customer might leave. Consider promotional offers.")
     else:
-        st.success(f"✅ **Low Churn Risk!** This customer is likely to stay.")
-        st.write(f"**Probability of Churning:** {prediction_proba * 100:.2f}%")
-        st.progress(float(prediction_proba))
+        st.error(f"🔴 **High Risk!** This customer is highly likely to leave. Immediate action required.")
+        
+    st.write(f"**Probability of Churning:** {prediction_proba * 100:.2f}%")
+    st.progress(float(prediction_proba))

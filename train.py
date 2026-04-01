@@ -10,6 +10,7 @@ from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline as ImbPipeline
+import matplotlib.pyplot as plt
 
 print("Starting to build the Customer Churn Prediction Models...")
 
@@ -85,6 +86,32 @@ for name, model in models.items():
         best_model_name = name
 
 print(f"\n✅ Best Model Selected: {best_model_name} with Accuracy Score: {best_acc:.4f}")
+
+# Extract Feature Importances (if the chosen model supports it)
+print("\nGenerating Feature Importance Graph...")
+classifier = best_model.named_steps['classifier']
+
+if hasattr(classifier, 'feature_importances_'):
+    importances = classifier.feature_importances_
+    
+    # Get the feature names directly from the ColumnTransformer
+    preprocessor = best_model.named_steps['preprocessor']
+    feature_names = preprocessor.get_feature_names_out()
+    
+    # Sort and plot top 10 features
+    indices = np.argsort(importances)[-10:]
+    top_features = [feature_names[i] for i in indices]
+    top_importances = importances[indices]
+    
+    plt.figure(figsize=(10, 6))
+    plt.barh(top_features, top_importances, color='#4CAF50')
+    plt.xlabel('Relative Importance')
+    plt.title(f'Top 10 Feature Importances ({best_model_name})')
+    plt.tight_layout()
+    plt.savefig('feature_importance.png')
+    print("📈 Saved 'feature_importance.png'")
+else:
+    print(f"Model {best_model_name} does not natively support feature_importances_. Skipping graph.")
 
 # Save the best model and pipeline to disk
 print("\nSaving the model to model.pkl...")
