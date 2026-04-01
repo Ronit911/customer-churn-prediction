@@ -1,23 +1,23 @@
-# 📉 Customer Churn Prediction System
+#  Customer Churn Prediction System
 
-## 💡 Problem Statement
+##  Problem Statement
 Predict whether a customer will leave a company based on their demographic profile, subscribed services, and billing information.
 
-## ⚙️ Overview
+##  Overview
 This is an end-to-end Machine Learning project focused on detailed Data Cleaning, Feature Engineering, and Model Training using real-world **Telco Customer Churn** data. We compare Logistic Regression, Random Forest, and XGBoost classifiers to identify the best-performing model, and deploy the final model as an interactive Web Application using **Streamlit**.
 
-## 💼 Business Impact
+##  Business Impact
 This model was designed to actively help telecommunication companies:
 - **Identify high-risk customers** before they cancel their subscriptions.
 - **Take proactive retention actions** by offering targeted discounts or tech support.
 - **Reduce revenue loss** by prioritizing customer success resources on users with a high probability of churning.
 
-## 🚀 Features & Highlights
+##  Features & Highlights
 * **Robust Feature Engineering**: Leverages `sklearn.compose.ColumnTransformer` to automate `StandardScaler` (for numerical data) and `OneHotEncoder` (for categorical data), ensuring zero data-leakage during train/test splits.
 * **Class Balancing**: Integrates `SMOTE` within an `imblearn` pipeline to synthetically boost minority class samples (churners), ensuring the model is not biased towards predicting "No Churn" simply because it's the most common outcome.
 * **Interactive UI**: A sleek internal tool built in Streamlit that predicts exact churn probabilities based on live user inputs.
 
-## 📊 Key Insights & Feature Importance
+##  Key Insights & Feature Importance
 Based on the machine learning model's analysis, we extracted the most important factors that drive a customer to churn:
 
 ![Feature Importance](feature_importance.png)
@@ -25,7 +25,7 @@ Based on the machine learning model's analysis, we extracted the most important 
 1. **Contract Type**: Long-term contract users (1 or 2 years) churn significantly less compared to month-to-month users.
 2. **Monthly Charges**: Customers with abnormally high monthly charges are far more likely to churn.
 3. **Tech Support & Security**: Customers lacking tech support or online security features are at a higher risk of leaving.
-## 📂 Project Structure
+##  Project Structure
 
 1. **`train.py`**: The Machine Learning pipeline script.
    - Cleans the raw data.
